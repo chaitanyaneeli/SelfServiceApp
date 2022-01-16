@@ -14,7 +14,7 @@
         </v-chip>
       </div>
 
-      <v-form v-model="active">
+      <v-form v-model="active" ref="form">
         <v-text-field label="Employee ID" prepend-inner-icon="mdi-badge-account" v-model="user.empId" 
         :rules="[rules.required, empIdRule]"></v-text-field>
         <v-text-field label="Name" prepend-inner-icon="mdi-account" v-model="user.name" :rules="[rules.required, empNameRule]"></v-text-field>
@@ -106,6 +106,7 @@ export default({
             this.backendResponse = true;
             this.backendMsgStatus = "success";
             this.backendMsg = "User "+ this.user.name + " successfully registered.";
+            this.$refs.form.reset();
           }
 
           if(response.headers["reg_code"] === "DUPLICATE"){
